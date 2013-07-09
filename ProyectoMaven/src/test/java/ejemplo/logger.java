@@ -1,4 +1,4 @@
-package Ejemplo;
+package ejemplo;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -52,7 +52,7 @@ public class logger {
         		if(subStr.equals("&"))
         		{
         			if(datos[i].substring(1, 20).equals("org.openqa.selenium"))
-        				log.error("Tiempo de respuesta agotado. Para mas detalles consultar las imágenes en la carpeta 'capturas'.");
+        				log.error("Tiempo de respuesta agotado. Para mas detalles consultar las imï¿½genes en la carpeta 'capturas'.");
         			else
         				log.error(datos[i].substring(1));
         		}

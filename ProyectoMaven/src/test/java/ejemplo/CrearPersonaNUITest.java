@@ -1,4 +1,4 @@
-package Ejemplo;
+package ejemplo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -12,9 +12,10 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.Select;
 import java.io.IOException;
 
-public class CrearPersona_RC {
+
+public class CrearPersonaNUITest {
 	private static WebDriver driver;
-	private String baseUrl;
+	private static String baseUrl;
 	private StringBuffer verificationErrors = new StringBuffer();
 	private final static long sleep = 5000L;
 	private final static long longSleep = 7000L;
@@ -22,17 +23,17 @@ public class CrearPersona_RC {
 	private static String username="PREVCLIENT10_11";
 	private static String password="PREVCLIENT10_11";
   
-	private static String tipoI = "Registro Civil";				 //Tipo identificación 
+	private static String tipoI = "Nï¿½mero ï¿½nico de identificaciï¿½n";//Tipo identificaciï¿½n 
 	private static String numeroI = "500000000";             //Cedula
-	private static String primerA = "Sánchez";               //Primer apellido
+	private static String primerA = "Sï¿½nchez";               //Primer apellido
 	private static String primerN = "Pedro";                 //Primer nombre
 	private static String segundoN = "Pablo";                //Segundo nombre
 	private static String genero = "Masculino";              //Genero
-	private static String condicion = "Vivo";                //Condición de la persona
+	private static String condicion = "Vivo";                //Condiciï¿½n de la persona
 	private static String fechaCondicion = "05/06/2013";     //Fecha condicion
 	private static String fechaExpedicionI = "21/12/2000";   //Fecha expedicion de identificacion
 	private static String paisExpedicionI = "COLOMBIA";      //Pais expedicion de identificacion
-	private static String deptoExpedicionI = "Bogotá D.C.";  //Departamento de expedicion de identificacion
+	private static String deptoExpedicionI = "Bogotï¿½ D.C.";  //Departamento de expedicion de identificacion
 	private static String ciudadExpedicionI = "Bogota";      //Ciudad expedicion de identificacion
 	private static String datos[] = new String[21];     //Vector para almacenar todos los errores que se van a mostrar
 	private static Integer i = 0;
@@ -50,7 +51,7 @@ public class CrearPersona_RC {
 	  if(!id.equals(""))
 		  eliminar(id);
     }
-
+	
 	@Test
 	public void testCrearPersona() throws Exception {
 	  driver.get(baseUrl + "PrevisionaWEB/login.seam");
@@ -64,7 +65,7 @@ public class CrearPersona_RC {
 		  driver.findElement(By.id("login:password")).clear();
 		  driver.findElement(By.id("login:password")).sendKeys("Previsiona_User");
 		  driver.findElement(By.id("login:loginId")).click();
-		  //Ingresar desde el menú
+		  //Ingresar desde el menï¿½
 		  Thread.sleep(sleep);
 		  //Ingresar al formulario Gestionar Personas
 		  driver.get(baseUrl + "/PrevisionaWEB/personas/busqueda_persona.seam");
@@ -123,12 +124,12 @@ public class CrearPersona_RC {
 			  //Toma pantallazo del error
 			  logger.captureScreen(getClass().getName());
 			  //Imprimir errores en el log
-			  logger.imprimirLog(datos);			  
+			  logger.imprimirLog(datos);
 		  }	
 	  } catch (Exception error){
 		  datos[i]="&"+error;
 		  i++;
-		  //Si se presenta la pantalla de error de la aplicación, hacer clic en el botón "Ver Detalles",
+		  //Si se presenta la pantalla de error de la aplicaciï¿½n, hacer clic en el botï¿½n "Ver Detalles",
 		  //obtener la traza del error y copiarla en el log 
     	  try
     	  {
@@ -179,11 +180,11 @@ public class CrearPersona_RC {
 	if(rsPersona.next()){
 		System.out.print("Validando...");
 		if(!tipoI.equals(rsPersona.getString(1))){
-			datos[i] = "&El tipo de identificación guardado ("+rsPersona.getString(1)+") no corresponde con el ingresado ("+tipoI+")";
+			datos[i] = "&El tipo de identificaciï¿½n guardado ("+rsPersona.getString(1)+") no corresponde con el ingresado ("+tipoI+")";
 			i++;
 		}
 		if(!numeroI.equals(rsPersona.getString(2)))	{
-			datos[i] = "&El número de identificación guadado ("+rsPersona.getString(2)+") no corresponde con el ingresado ("+numeroI+")";
+			datos[i] = "&El nï¿½mero de identificaciï¿½n guadado ("+rsPersona.getString(2)+") no corresponde con el ingresado ("+numeroI+")";
 			i++;
 		}	
 		if(!primerN.equals(rsPersona.getString(3)))	{
@@ -210,61 +211,61 @@ public class CrearPersona_RC {
 			i++;
 		}
 		if(!condicion.equals(rsPersona.getString(9))) {	
-			datos[i] = "&La condición de la persona guardada ("+rsPersona.getString(9)+") no corresponde con el ingresada ("+condicion+")";
+			datos[i] = "&La condiciï¿½n de la persona guardada ("+rsPersona.getString(9)+") no corresponde con el ingresada ("+condicion+")";
 			i++;
 		}
 		if(fechaCondicion==null){
 			if(fechaCondicion!=(rsPersona.getString(10)))	{
-				datos[i] = "&La fecha de la condición de la persona guardada ("+rsPersona.getString(10)+") no corresponde con el ingresada ("+fechaCondicion+")";
+				datos[i] = "&La fecha de la condiciï¿½n de la persona guardada ("+rsPersona.getString(10)+") no corresponde con el ingresada ("+fechaCondicion+")";
 				i++;
 			}
 		} else {
 			if(!fechaCondicion.equals(rsPersona.getString(10)))	{
-				datos[i] = "&La fecha de la condición de la persona guardada ("+rsPersona.getString(10)+") no corresponde con el ingresada ("+fechaCondicion+")";
+				datos[i] = "&La fecha de la condiciï¿½n de la persona guardada ("+rsPersona.getString(10)+") no corresponde con el ingresada ("+fechaCondicion+")";
 				i++;
 			}
 		}	
 		if(fechaExpedicionI==null){
 			if(fechaExpedicionI!=(rsPersona.getString(11))) {	
-				datos[i] = "&La fecha de expedición de la identificación guardada ("+rsPersona.getString(11)+") no corresponde con el ingresada ("+fechaExpedicionI+")";
+				datos[i] = "&La fecha de expediciï¿½n de la identificaciï¿½n guardada ("+rsPersona.getString(11)+") no corresponde con el ingresada ("+fechaExpedicionI+")";
 				i++;
 			}
 		} else{
 			if(!fechaExpedicionI.equals(rsPersona.getString(11))) {	
-				datos[i] = "&La fecha de expedición de la identificación guardada ("+rsPersona.getString(11)+") no corresponde con el ingresada ("+fechaExpedicionI+")";
+				datos[i] = "&La fecha de expediciï¿½n de la identificaciï¿½n guardada ("+rsPersona.getString(11)+") no corresponde con el ingresada ("+fechaExpedicionI+")";
 				i++;
 			}
 		}	
 		if(paisExpedicionI==null){
 			if(paisExpedicionI!=(rsPersona.getString(12))) {	
-				datos[i] = "&El pais de expedición de la identificación guardada ("+rsPersona.getString(12)+") no corresponde con el ingresada ("+paisExpedicionI+")";
+				datos[i] = "&El pais de expediciï¿½n de la identificaciï¿½n guardada ("+rsPersona.getString(12)+") no corresponde con el ingresada ("+paisExpedicionI+")";
 				i++;
 			}
 		} else{
 			if(!paisExpedicionI.equals(rsPersona.getString(12))) {	
-				datos[i] = "&El pais de expedición de la identificación guardada ("+rsPersona.getString(12)+") no corresponde con el ingresada ("+paisExpedicionI+")";
+				datos[i] = "&El pais de expediciï¿½n de la identificaciï¿½n guardada ("+rsPersona.getString(12)+") no corresponde con el ingresada ("+paisExpedicionI+")";
 				i++;
 			}
 		}	
 		if(deptoExpedicionI==null){
 			if(deptoExpedicionI!=(rsPersona.getString(13))) {	
-				datos[i] = "&El departamento de expedición de la identificación guardada ("+rsPersona.getString(13)+") no corresponde con el ingresado ("+deptoExpedicionI+")";
+				datos[i] = "&El departamento de expediciï¿½n de la identificaciï¿½n guardada ("+rsPersona.getString(13)+") no corresponde con el ingresado ("+deptoExpedicionI+")";
 				i++;
 			}
 		} else {
 			if(!deptoExpedicionI.equals(rsPersona.getString(13))) {	
-				datos[i] = "&El departamento de expedición de la identificación guardada ("+rsPersona.getString(13)+") no corresponde con el ingresado ("+deptoExpedicionI+")";
+				datos[i] = "&El departamento de expediciï¿½n de la identificaciï¿½n guardada ("+rsPersona.getString(13)+") no corresponde con el ingresado ("+deptoExpedicionI+")";
 				i++;
 			}
 		}	
 		if(ciudadExpedicionI==null){
 			if(ciudadExpedicionI!=(rsPersona.getString(14))){	
-				datos[i] = "&La ciudad de expedición de la identificación guardada ("+rsPersona.getString(14)+") no corresponde con el ingresada ("+ciudadExpedicionI+")";
+				datos[i] = "&La ciudad de expediciï¿½n de la identificaciï¿½n guardada ("+rsPersona.getString(14)+") no corresponde con el ingresada ("+ciudadExpedicionI+")";
 				i++;
 			}
 		} else {
 			if(!ciudadExpedicionI.equals(rsPersona.getString(14))){	
-				datos[i] = "&La ciudad de expedición de la identificación guardada ("+rsPersona.getString(14)+") no corresponde con el ingresada ("+ciudadExpedicionI+")";
+				datos[i] = "&La ciudad de expediciï¿½n de la identificaciï¿½n guardada ("+rsPersona.getString(14)+") no corresponde con el ingresada ("+ciudadExpedicionI+")";
 				i++;
 			}
 		}
@@ -289,7 +290,7 @@ public class CrearPersona_RC {
 	}
 	else
 	{
-		datos[i] = "\nSe presentaron "+(i-2)+" errores al almacenar la persona en la base de datos. A continuación se presentan los errores";
+		datos[i] = "\nSe presentaron "+(i-2)+" errores al almacenar la persona en la base de datos. A continuaciï¿½n se presentan los errores";
 		i++;
 	}
 	
@@ -302,7 +303,7 @@ public class CrearPersona_RC {
 		eliminar(id);
 	
 	Thread.sleep(sleep);
-	//Cerrar sesión
+	//Cerrar sesiï¿½n
 	driver.findElement(By.id("j_id54")).click();
 	Thread.sleep(longSleep);
 	
@@ -337,7 +338,7 @@ public class CrearPersona_RC {
 	    	id = rsId.getString(1);
 	  	    System.out.print("Id Eliminar:"+id);
 	    }
-	    //Si no coincide tipo y número buscar solo por número de id:
+	    //Si no coincide tipo y nï¿½mero buscar solo por nï¿½mero de id:
 	    else
 	    {
 			consultarId = "SELECT PERID " +
